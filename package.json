@@ -20,7 +20,7 @@
     "start": "set PORT=4000 && react-scripts start",
 <<<<<<< HEAD
 	"predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -b master -d build",
 =======
 >>>>>>> a498eb67a43c931921aec95c27439301ab6028ed
     "build": "react-scripts build",
