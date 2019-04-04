@@ -7,3 +7,5 @@ In the project directory, you can run:
 ### `npm start`
 
 ### Using api.openweathermap.org
+
+![alt text](https://github.com/eravinashm/weather-app/blob/master/public/image1.PNG)
