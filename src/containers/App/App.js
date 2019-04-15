@@ -7,24 +7,28 @@ import WeatherDataByCityId from '../../services/WeatherDataByCityIdService';
 import WeatherDataByCityCountryService from '../../services/WeatherDataByCityCountryService';
 import UserForm from '../../components/UserForm/UserForm';
 import Form from '../../UI/Autocomplete/Form/Form';
-import Information from '../../components/Information/Information';
 import Autocomplete from '../../UI/Autocomplete/Autocomplete';
 import cityListJson from '../../data/city.list.json';
+import SimpleCard from '../../components/SimpleCard/SimpleCard';
 
 class App extends Component {
   state = {
     weatherData: null,
-    completeCityList: []
+    completeCityList: [],
+    hasError: false,
+    cityName: ''
   }
 
   componentDidMount(){
     this.autocomplete();
   }
 
-  fetchServiceData = async (searchParams) => {
-    let responseData = await WeatherDataByCityCountryService(searchParams);
-    console.log(responseData);
-    this.setState({weatherData: responseData});
+  fetchResponseData = async (searchParams) => {
+    let weatherData = await WeatherDataByCityCountryService(searchParams);
+    if(weatherData !== null){
+      this.setState({weatherData, hasError: false});
+    }else
+      this.setState({hasError: true});
   }
  
   formData = () => {
@@ -38,9 +42,10 @@ class App extends Component {
     let searchParams = {...this.state.searchParams};
     searchParams.cityName = cityName;
     searchParams.countryCode = countryCode;
-    console.log("cityName = "+cityName+", countryCode = "+countryCode);        
+    this.setState({cityName: cityName});
+    // console.log("cityName = "+cityName+", countryCode = "+countryCode);        
     if(countryCode !== '')
-      this.fetchServiceData(searchParams);    
+      this.fetchResponseData(searchParams);    
   }
 
   autocomplete = () => {
@@ -74,8 +79,11 @@ render() {
       <React.Fragment>
        <Form formData={this.formData} />  
        {
+         this.state.hasError ? 
+         <h1>For Cityname: {this.state.cityName} is not in records. Please select a valid cityname from dropdown list.</h1>:
          weatherData !== null ? 
-         <Information 
+         <SimpleCard 
+          cityName={this.state.cityName}
           humidity={humidity}
           pressure={pressure}
           temperature={temperature}
