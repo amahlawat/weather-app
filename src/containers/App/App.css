@@ -6,3 +6,8 @@
   font-size: 20px;
   text-align: center;
 }
+.recent-searches{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30px;
+}

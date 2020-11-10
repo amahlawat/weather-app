@@ -13,7 +13,7 @@ function form(props){
     return(
         <React.Fragment>
             <div className="autocomplete form-main">
-                <input id="cityName" onKeyPress={event => setCityName(event.target.value)} type="text" name="myCity" placeholder="City" />
+                <input id="cityName" onChange={event => setCityName(event.target.value)} type="text" name="myCity" placeholder="City" />
                 <button onClick={search} id="button-check" className={`button-check ${cityName === "" ? "button-disabled": "button-active"}`}>Check Weather</button>            
             </div>
         </React.Fragment>

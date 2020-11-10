@@ -69,13 +69,15 @@ render() {
     // if(weatherData.city !== undefined)
     //   console.log(weatherData.city)
     // data = weatherData;
-    let weatherData = this.state.weatherData;
-    let humidity = '', pressure = '', temperature = '';
-    if(weatherData !== null){
-      humidity = weatherData.main.humidity;
-      pressure = weatherData.main.pressure;
-      temperature = weatherData.main.temp;
+    let recentSearchesData = [];
+    if(JSON.parse(localStorage.getItem("weatherData")))
+      recentSearchesData = [ ...JSON.parse(localStorage.getItem("weatherData"))];        
+
+    if(this.state.weatherData !== null){
+      recentSearchesData.unshift(this.state.weatherData);      
+      localStorage.setItem("weatherData", JSON.stringify(recentSearchesData));
     } 
+      
     return (
       <React.Fragment>
         <Header />
@@ -85,13 +87,19 @@ render() {
         {
           this.state.hasError ? 
           <h1>For Cityname: {this.state.cityName} is not in records. Please select a valid cityname from dropdown list.</h1>:
-          weatherData !== null ? 
-          <SimpleCard 
-            cityName={this.state.cityName}
-            humidity={humidity}
-            pressure={pressure}
-            temperature={temperature}
-          />: <img src={WeatherImage} alt=""/>
+          recentSearchesData.length > 0 ?
+          <div className="recent-searches">
+            <h5>Recent Searches</h5>
+          {recentSearchesData.map(weather => (
+              <SimpleCard 
+                cityName={weather.name}
+                humidity={weather.main.humidity}
+                pressure={weather.main.pressure}
+                temperature={weather.main.temp}
+              />
+            ))
+          } 
+          </div>: <img src={WeatherImage} alt=""/>
         }      
         </div>
       </React.Fragment>
