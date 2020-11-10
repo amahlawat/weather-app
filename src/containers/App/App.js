@@ -75,7 +75,7 @@ render() {
       humidity = weatherData.main.humidity;
       pressure = weatherData.main.pressure;
       temperature = weatherData.main.temp;
-    }
+    } 
     return (
       <React.Fragment>
         <Header />
