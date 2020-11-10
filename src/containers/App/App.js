@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import jquery from 'jquery';
 
 // import logo from './logo.svg';
-// import './App.css';
+import './App.css';
 import WeatherDataByCityId from '../../services/WeatherDataByCityIdService';
 import WeatherDataByCityCountryService from '../../services/WeatherDataByCityCountryService';
 import UserForm from '../../components/UserForm/UserForm';
@@ -10,6 +10,8 @@ import Form from '../../UI/Autocomplete/Form/Form';
 import Autocomplete from '../../UI/Autocomplete/Autocomplete';
 import cityListJson from '../../data/city.list.json';
 import SimpleCard from '../../components/SimpleCard/SimpleCard';
+import Header from '../../components/Header/Header';
+const WeatherImage = require("../../assets/weather.gif");
 
 class App extends Component {
   state = {
@@ -31,8 +33,8 @@ class App extends Component {
       this.setState({hasError: true});
   }
  
-  formData = () => {
-    let cityName = document.getElementById("cityName").value;
+  formData = cityName => {
+    console.log(" cityName ", cityName)
     let countryCode = '';
     this.state.completeCityList.map(singleObject => {
       if(cityName === singleObject.name){
@@ -42,7 +44,7 @@ class App extends Component {
     let searchParams = {...this.state.searchParams};
     searchParams.cityName = cityName;
     searchParams.countryCode = countryCode;
-    this.setState({cityName: cityName});
+    this.setState({cityName});
     // console.log("cityName = "+cityName+", countryCode = "+countryCode);        
     if(countryCode !== '')
       this.fetchResponseData(searchParams);    
@@ -59,7 +61,6 @@ class App extends Component {
       })
       this.setState({completeCityList: response});
     });
-    console.log(cityList)
     Autocomplete(document.getElementById("cityName"), cityList);
   }
 
@@ -77,18 +78,22 @@ render() {
     }
     return (
       <React.Fragment>
-       <Form formData={this.formData} />  
-       {
-         this.state.hasError ? 
-         <h1>For Cityname: {this.state.cityName} is not in records. Please select a valid cityname from dropdown list.</h1>:
-         weatherData !== null ? 
-         <SimpleCard 
-          cityName={this.state.cityName}
-          humidity={humidity}
-          pressure={pressure}
-          temperature={temperature}
-         />: <div><h1>Feed data to get weather information</h1></div>
-       }      
+        <Header />
+        <div className="app-main">
+        <p className="app-weather-info-heading">Search your city weather information</p>
+        <Form formData={this.formData} />  
+        {
+          this.state.hasError ? 
+          <h1>For Cityname: {this.state.cityName} is not in records. Please select a valid cityname from dropdown list.</h1>:
+          weatherData !== null ? 
+          <SimpleCard 
+            cityName={this.state.cityName}
+            humidity={humidity}
+            pressure={pressure}
+            temperature={temperature}
+          />: <img src={WeatherImage} alt=""/>
+        }      
+        </div>
       </React.Fragment>
     );
   }

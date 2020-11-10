@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './Form.css';
 
-const form = (props) => {
+function form(props){
+    const [cityName, setCityName] = useState('');
+    const search = () => {
+        console.log(" search ", cityName)
+        props.formData(document.getElementById("cityName").value);
+        document.getElementById("cityName").value = "";
+        setCityName("");
+    }
+
     return(
         <React.Fragment>
-            <div className="autocomplete" style={{"paddingTop":"20px"}}>
-            <input id="cityName" type="text" name="myCity" placeholder="City" />
-            </div><br />
-            <div style={{"paddingTop":"20px"}}>
-                <button onClick={() => props.formData()} >Check Weather</button>            
+            <div className="autocomplete form-main">
+                <input id="cityName" onKeyPress={event => setCityName(event.target.value)} type="text" name="myCity" placeholder="City" />
+                <button onClick={search} id="button-check" className={`button-check ${cityName === "" ? "button-disabled": "button-active"}`}>Check Weather</button>            
             </div>
         </React.Fragment>
 

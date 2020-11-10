@@ -1,0 +1,22 @@
+.form-main{
+    padding-top: 10px;
+    display: flex ;
+    justify-content: center;
+}
+.button-check {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.button-active{
+    background: #0099cc;
+    color: #fff;
+    border: solid;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.button-disabled{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
