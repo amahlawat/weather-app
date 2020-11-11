@@ -5,3 +5,12 @@
     width: 100%;
     text-align: center;
 }
+.footer{
+    background: #322f31; 
+    color: #fff;   
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    font-style: italic;
+}

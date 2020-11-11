@@ -10,7 +10,7 @@ import Form from '../../UI/Autocomplete/Form/Form';
 import Autocomplete from '../../UI/Autocomplete/Autocomplete';
 import cityListJson from '../../data/city.list.json';
 import SimpleCard from '../../components/SimpleCard/SimpleCard';
-import Header from '../../components/Header/Header';
+import { Header, Footer } from '../../components/Header/Header';
 const WeatherImage = require("../../assets/weather.gif");
 
 class App extends Component {
@@ -88,8 +88,9 @@ render() {
           this.state.hasError ? 
           <h1>For Cityname: {this.state.cityName} is not in records. Please select a valid cityname from dropdown list.</h1>:
           recentSearchesData.length > 0 ?
+          <React.Fragment>
+          <h2 className="recent-heading">Recent Searches</h2>
           <div className="recent-searches">
-            <h5>Recent Searches</h5>
           {recentSearchesData.map(weather => (
               <SimpleCard 
                 cityName={weather.name}
@@ -99,9 +100,11 @@ render() {
               />
             ))
           } 
-          </div>: <img src={WeatherImage} alt=""/>
+          </div>
+          </React.Fragment>: <img src={WeatherImage} alt=""/>
         }      
         </div>
+        <Footer />
       </React.Fragment>
     );
   }

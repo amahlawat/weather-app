@@ -9,5 +9,17 @@
 .recent-searches{
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding-top: 30px;
+}
+.recent-heading{
+  text-align: center;
+}
+.recent-searches div{
+  margin-top: 1px;
+}
+@media only screen and (max-width: 600px) {
+  .recent-searches {
+    padding-left: 40px;
+  }
 }
