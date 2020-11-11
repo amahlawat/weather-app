@@ -2,7 +2,7 @@
   "name": "weather-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/eravinashm/weather-app/",
+  "homepage": "http://amahlawat.github.io/weather-app/",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "axios": "^0.18.0",
