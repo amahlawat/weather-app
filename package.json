@@ -5,7 +5,7 @@
   "homepage": "http://amahlawat.github.io/weather-app/",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "gh-pages": "^2.0.1",
     "jquery": "^3.3.1",
     "react": "^16.8.6",
